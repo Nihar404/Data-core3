@@ -472,6 +472,8 @@ class IntelligentDataProcessor {
             const statsElement = document.getElementById('storageStats');
             if (statsElement) {
                 let quotaDisplay = '';
+                let storageRemaining = 'N/A';
+
                 if (quotaInfo) {
                     const quotaWarning = quotaInfo.percentUsed > 80 ? ' style="color: #ff0066;"' : '';
                     quotaDisplay = `
@@ -480,6 +482,8 @@ class IntelligentDataProcessor {
                             <span class="stat-value">${quotaInfo.percentUsed}%</span>
                         </div>
                     `;
+                    // Calculate remaining storage in GB
+                    storageRemaining = this.formatFileSize(quotaInfo.available);
                 }
 
                 statsElement.innerHTML = `
@@ -496,11 +500,11 @@ class IntelligentDataProcessor {
                             <span class="stat-label">STORAGE_USED:</span>
                             <span class="stat-value">${stats.usedPercentage}%</span>
                         </div>
-                        ${quotaDisplay}
                         <div class="stat-item">
-                            <span class="stat-label">ACTIVE_BACKENDS:</span>
-                            <span class="stat-value">${stats.backends ? stats.backends.length : 0}</span>
+                            <span class="stat-label">STORAGE_REMAINING:</span>
+                            <span class="stat-value" id="storageRemaining">${storageRemaining}</span>
                         </div>
+                        ${quotaDisplay}
                     </div>
                 `;
             }
@@ -906,6 +910,9 @@ async function storeAndProcessFiles(files) {
 
     if (!canStore.canStore) {
         console.error('Cannot store files:', canStore.reason);
+        console.log('File sizes:', Array.from(files).map(f => `${f.name}: ${dataProcessor.formatFileSize(f.size)}`));
+        console.log('Total size:', dataProcessor.formatFileSize(totalSize));
+
         for (const file of files) {
             storageResults.push({
                 success: false,
@@ -918,7 +925,7 @@ async function storeAndProcessFiles(files) {
         setStatusActive(schemaStatus, false);
         isProcessing = false;
         displayProcessingResults(storageResults);
-        showNotification('STORAGE_QUOTA_EXCEEDED_PLEASE_DELETE_FILES', 'error');
+        showNotification(`STORAGE_CHECK_FAILED: ${canStore.reason}`, 'error');
         return;
     }
 

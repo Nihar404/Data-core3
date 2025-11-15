@@ -168,12 +168,19 @@ class StorageManager {
     }
 
     selectBackendForFile(file) {
-        // Small files (< 1MB) can go to localStorage if available
-        if (file.size < 1024 * 1024 && this.backends[1]) {
-            return this.backends[1];
+        // Always prefer IndexedDB (backends[0]) if available, as it has much higher capacity (200GB)
+        // LocalStorage is only used as a fallback if IndexedDB is not available
+        if (this.backends[0]) {
+            return this.backends[0]; // IndexedDB - 200GB capacity
         }
-        // Large files go to IndexedDB
-        return this.backends[0];
+
+        // Fallback to LocalStorage only if IndexedDB is unavailable
+        if (this.backends[1] && file.size < 5 * 1024 * 1024) { // Only files < 5MB
+            return this.backends[1]; // LocalStorage - 10MB total capacity
+        }
+
+        // If no suitable backend, return the first available
+        return this.backends[0] || this.backends[1];
     }
 
     async getUserFiles(username) {
@@ -292,12 +299,33 @@ class StorageManager {
 
     async canStoreFile(fileSize) {
         const quotaInfo = await this.checkStorageQuota();
-        if (quotaInfo && quotaInfo.available < fileSize) {
+
+        // If quota info is not available, allow the storage attempt
+        if (!quotaInfo) {
+            console.warn('Storage quota information not available, proceeding with storage');
+            return { canStore: true };
+        }
+
+        // Log quota information for debugging
+        console.log('Storage Check:', {
+            fileSize: this.formatFileSize(fileSize),
+            available: this.formatFileSize(quotaInfo.available),
+            usage: this.formatFileSize(quotaInfo.usage),
+            quota: this.formatFileSize(quotaInfo.quota),
+            percentUsed: quotaInfo.percentUsed + '%'
+        });
+
+        // Allow storage if there's enough space with a 10MB safety margin
+        const safetyMargin = 10 * 1024 * 1024; // 10MB
+        const requiredSpace = fileSize + safetyMargin;
+
+        if (quotaInfo.available < requiredSpace) {
             return {
                 canStore: false,
                 reason: `Insufficient storage. File size: ${this.formatFileSize(fileSize)}, Available: ${this.formatFileSize(quotaInfo.available)}`
             };
         }
+
         return { canStore: true };
     }
 
@@ -317,7 +345,7 @@ class IndexedDBBackend {
         this.version = 2;
         // Set theoretical max - actual limit is browser-dependent (typically 50% of disk)
         // Chrome: ~60% of disk space, Firefox: ~50% of disk space, Safari: ~1GB unless user approves more
-        this.maxSize = 10 * 1024 * 1024 * 1024; // 10GB theoretical max
+        this.maxSize = 200 * 1024 * 1024 * 1024; // 200GB theoretical max
         this.type = 'indexedDB';
         this.db = null;
     }
@@ -353,7 +381,11 @@ class IndexedDBBackend {
     async storeFile(username, file, category, metadata = {}) {
         if (!this.db) await this.init();
 
-        return new Promise(async (resolve, reject) => {
+        // Convert file to ArrayBuffer BEFORE creating the transaction
+        // This prevents the transaction from auto-committing while waiting for async operation
+        const fileArrayBuffer = await this.fileToArrayBuffer(file);
+
+        return new Promise((resolve, reject) => {
             try {
                 const transaction = this.db.transaction(['files', 'metadata'], 'readwrite');
 
@@ -366,7 +398,7 @@ class IndexedDBBackend {
                     category: category,
                     uploadDate: new Date().toISOString(),
                     username: username,
-                    data: await this.fileToArrayBuffer(file)
+                    data: fileArrayBuffer
                 };
 
                 const metadataRecord = {
