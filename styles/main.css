@@ -6,16 +6,16 @@
 }
 
 :root {
-    --matte-dark: #2d3748;
-    --matte-darker: #1a202c;
-    --matte-light: #4a5568;
-    --sunny-yellow: #f6e05e;
-    --electronic-blue: #63b3ed;
-    --bright-red: #fc8181;
+    --matte-dark: #2b3137;
+    --matte-darker: #1a1d23;
+    --matte-light: #3d4451;
+    --sunny-yellow: #4a90e2;
+    --electronic-blue: #4a90e2;
+    --bright-red: #5a6c7d;
     --pure-white: #ffffff;
-    --text-light: #e2e8f0;
-    --text-dark: #1a202c;
-    --border-gray: #718096;
+    --text-light: #e8eaed;
+    --text-dark: #0d0f12;
+    --border-gray: #5a6c7d;
 }
 
 body {
@@ -58,7 +58,7 @@ body {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, var(--sunny-yellow), var(--electronic-blue), var(--bright-red));
+    background: linear-gradient(90deg, #4a90e2, #6ba3e8, #4a90e2);
 }
 
 .logo-container {
@@ -354,7 +354,7 @@ input:checked + .toggle-slider:before {
 /* Processing Section - Trust Indicators */
 .status-display {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     margin-bottom: 32px;
 }
@@ -852,7 +852,7 @@ input:checked + .toggle-slider:before {
     }
     
     .status-display {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .options-grid {
@@ -876,7 +876,14 @@ input:checked + .toggle-slider:before {
         padding: 18px 30px;
         font-size: 1rem;
     }
-    
+}
+
+/* Mobile breakpoint for very small screens */
+@media (max-width: 600px) {
+    .status-display {
+        grid-template-columns: 1fr;
+    }
+
     .logout-btn {
         position: absolute !important;
         top: 20px !important;
@@ -962,9 +969,9 @@ input:checked + .toggle-slider:before {
 }
 
 .storage-controls {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .storage-backends {
@@ -1025,8 +1032,11 @@ input:checked + .toggle-slider:before {
 
 .storage-actions {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .stats-grid {
@@ -1407,8 +1417,7 @@ input:checked + .toggle-slider:before {
 /* Responsive Design for Storage Sections */
 @media (max-width: 768px) {
     .storage-controls {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        flex-direction: column;
     }
 
     .stats-grid {
@@ -1416,13 +1425,13 @@ input:checked + .toggle-slider:before {
     }
 
     .storage-actions {
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 100%;
     }
 
     .storage-actions .cyber-btn {
-        flex: 1;
-        min-width: 150px;
+        width: 100%;
     }
 
     .preview-grid {
@@ -1451,5 +1460,522 @@ input:checked + .toggle-slider:before {
 
     .sql-viewer th, .sql-viewer td {
         padding: 8px;
+    }
+}
+
+/* Business-Friendly Animations */
+
+/* Smooth fade-in on page load */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Subtle pulse for active indicators */
+@keyframes subtlePulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+/* Smooth shimmer effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Apply animations to sections */
+.header {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.storage-stats-section {
+    animation: fadeIn 0.8s ease-out 0.1s backwards;
+}
+
+.storage-management-section {
+    animation: fadeIn 0.8s ease-out 0.2s backwards;
+}
+
+.upload-section {
+    animation: fadeIn 0.8s ease-out 0.3s backwards;
+}
+
+.analysis-section {
+    animation: fadeIn 0.8s ease-out 0.4s backwards;
+}
+
+.processing-section {
+    animation: fadeIn 0.8s ease-out 0.5s backwards;
+}
+
+.stored-files-section {
+    animation: fadeIn 0.8s ease-out 0.6s backwards;
+}
+
+.results-section {
+    animation: fadeIn 0.8s ease-out 0.7s backwards;
+}
+
+/* Hover effects for buttons */
+.cyber-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cyber-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(74, 144, 226, 0.3);
+}
+
+.cyber-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Card hover effects */
+.stat-item,
+.status-item,
+.backend-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-item:hover,
+.status-item:hover,
+.backend-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    border-color: var(--electronic-blue);
+}
+
+/* Status indicator pulse */
+.status-indicator {
+    animation: subtlePulse 2s ease-in-out infinite;
+}
+
+/* Smooth transitions for toggles */
+.cyber-toggle input:checked + .toggle-slider {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Upload area hover effect */
+.upload-area {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.upload-area:hover {
+    border-color: var(--electronic-blue);
+    background: rgba(74, 144, 226, 0.05);
+}
+
+/* Progress bar animation */
+.progress-fill {
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth gradient animation for accent bar */
+.header::before {
+    animation: shimmer 3s linear infinite;
+    background: linear-gradient(
+        90deg,
+        #4a90e2 0%,
+        #6ba3e8 25%,
+        #4a90e2 50%,
+        #6ba3e8 75%,
+        #4a90e2 100%
+    );
+    background-size: 2000px 100%;
+}
+
+/* Input focus animation */
+.cyber-input input {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cyber-input input:focus {
+    transform: scale(1.01);
+}
+
+/* File item hover */
+.file-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.file-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Logout button hover */
+.logout-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logout-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+/* Advanced Mature Animations */
+
+/* Subtle breathing effect for sections */
+@keyframes breathe {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 8px 30px rgba(74, 144, 226, 0.08);
+    }
+}
+
+/* Data flow animation */
+@keyframes dataFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Sophisticated border glow */
+@keyframes borderGlow {
+    0%, 100% {
+        border-color: var(--matte-light);
+        box-shadow: 0 0 0 rgba(74, 144, 226, 0);
+    }
+    50% {
+        border-color: rgba(74, 144, 226, 0.3);
+        box-shadow: 0 0 15px rgba(74, 144, 226, 0.1);
+    }
+}
+
+/* Terminal-style typing cursor */
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Smooth scale pulse for important elements */
+@keyframes maturityPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.01);
+        opacity: 0.98;
+    }
+}
+
+/* Gradient border animation */
+@keyframes gradientBorder {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Apply sophisticated animations */
+
+/* Section containers with subtle breathing */
+.storage-stats-section,
+.storage-management-section,
+.processing-section {
+    animation: breathe 4s ease-in-out infinite;
+}
+
+/* Section titles with professional appearance */
+.section-title {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #4a90e2, transparent);
+    animation: dataFlow 3s ease-in-out infinite;
+}
+
+/* Stats with mature hover effects */
+.stat-value {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+
+.stat-item:hover .stat-value {
+    transform: scale(1.08);
+    color: var(--electronic-blue);
+}
+
+/* Professional progress bar */
+.cyber-progress {
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-progress::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: progressShine 2s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Sophisticated file item animations */
+.file-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.file-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.05), transparent);
+    transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.file-item:hover::before {
+    left: 100%;
+}
+
+/* Professional button ripple effect */
+.cyber-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.cyber-btn:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Elegant input field animations */
+.cyber-input {
+    position: relative;
+}
+
+.cyber-input::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--electronic-blue);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+}
+
+.cyber-input input:focus + .input-glow::after,
+.cyber-input:focus-within::after {
+    width: 100%;
+}
+
+/* Terminal cursor effect for placeholders */
+.analysis-placeholder p::after,
+.result-placeholder p::after {
+    content: '█';
+    animation: blink 1s step-start infinite;
+    margin-left: 4px;
+    color: var(--electronic-blue);
+}
+
+/* Sophisticated header animation */
+.logo {
+    background: linear-gradient(135deg, #ffffff 0%, var(--electronic-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Mature tagline animation */
+.tagline {
+    position: relative;
+    display: inline-block;
+}
+
+.tagline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.1), transparent);
+    animation: scanLine 4s ease-in-out infinite;
+}
+
+@keyframes scanLine {
+    0%, 100% {
+        width: 0%;
+        left: 0;
+    }
+    50% {
+        width: 100%;
+        left: 0;
+    }
+}
+
+/* Professional status indicators */
+.status-label {
+    position: relative;
+}
+
+.status-item:hover .status-label::before {
+    content: '▶ ';
+    color: var(--electronic-blue);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Refined upload area interaction */
+.upload-area {
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #4a90e2, #6ba3e8, #4a90e2, #6ba3e8);
+    background-size: 400% 400%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    border-radius: inherit;
+    z-index: -1;
+    animation: gradientRotate 8s ease infinite;
+}
+
+.upload-area:hover::before {
+    opacity: 0.3;
+}
+
+@keyframes gradientRotate {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Sophisticated search input */
+#searchInput {
+    position: relative;
+}
+
+#searchInput:focus {
+    animation: maturityPulse 2s ease-in-out infinite;
+}
+
+/* Professional modal entrance */
+.modal-content {
+    animation: modalSlideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

@@ -6,15 +6,15 @@
 }
 
 :root {
-    --matte-dark: #2d3748;
-    --matte-darker: #1a202c;
-    --matte-light: #4a5568;
-    --sunny-yellow: #f6e05e;
-    --electronic-blue: #63b3ed;
-    --bright-red: #fc8181;
+    --matte-dark: #2b3137;
+    --matte-darker: #1a1d23;
+    --matte-light: #3d4451;
+    --sunny-yellow: #4a90e2;
+    --electronic-blue: #4a90e2;
+    --bright-red: #5a6c7d;
     --pure-white: #ffffff;
-    --text-light: #e2e8f0;
-    --success-green: #68d391;
+    --text-light: #e8eaed;
+    --success-green: #4a90e2;
 }
 
 body {
@@ -48,7 +48,7 @@ body {
     border: 2px solid var(--matte-light);
     padding: 60px 50px;
     width: 100%;
-    max-width: 480px;
+    max-width: 582px;
     position: relative;
     z-index: 2;
     border-radius: 20px;
@@ -62,12 +62,17 @@ body {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, var(--sunny-yellow), var(--electronic-blue), var(--bright-red));
+    background: linear-gradient(90deg, #4a90e2, #6ba3e8, #4a90e2);
 }
 
 .login-logo {
     text-align: center;
     margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .login-logo h1 {
@@ -78,6 +83,11 @@ body {
     letter-spacing: 2px;
     margin-bottom: 20px;
     line-height: 1.1;
+    width: 100%;
+    text-align: center;
+    word-spacing: normal;
+    white-space: nowrap;
+    overflow: visible;
 }
 
 .login-logo p {
@@ -251,16 +261,24 @@ body {
     background: var(--matte-darker);
     border-radius: 12px;
     border: 1px solid var(--matte-light);
+    overflow: hidden;
+    width: 100%;
 }
 
 .security-assurance p {
     color: var(--electronic-blue);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    flex-wrap: wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* Loading Animation */
@@ -344,16 +362,22 @@ body {
     
     .login-logo h1 {
         font-size: 2.5rem;
+        white-space: normal;
+        word-break: keep-all;
     }
     
     .login-logo p {
         font-size: 1rem;
     }
     
+    .security-assurance {
+        padding: 15px;
+    }
+
     .security-assurance p {
-        font-size: 0.8rem;
-        flex-direction: column;
+        font-size: 0.75rem;
         gap: 5px;
+        line-height: 1.6;
     }
 }
 
@@ -364,6 +388,9 @@ body {
     
     .login-logo h1 {
         font-size: 2rem;
+        white-space: normal;
+        word-break: keep-all;
+        letter-spacing: 1px;
     }
     
     .form-group {
@@ -416,4 +443,452 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--electronic-blue);
+}
+
+/* Business-Friendly Animations for Login Page */
+
+/* Smooth fade-in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Gradient shimmer */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Subtle pulse */
+@keyframes gentlePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* Apply fade-in to login container */
+.login-container {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Login box entrance animation */
+.login-box {
+    animation: fadeInUp 0.6s ease-out 0.2s backwards;
+}
+
+/* Animated gradient accent bar */
+.login-box::before {
+    animation: shimmer 3s linear infinite;
+    background: linear-gradient(
+        90deg,
+        #4a90e2 0%,
+        #6ba3e8 25%,
+        #4a90e2 50%,
+        #6ba3e8 75%,
+        #4a90e2 100%
+    );
+    background-size: 2000px 100%;
+}
+
+/* Button hover effects */
+.login-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(74, 144, 226, 0.4);
+}
+
+.login-btn:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+/* Input field transitions */
+.cyber-input input {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cyber-input input:focus {
+    transform: scale(1.01);
+}
+
+/* Switch link hover */
+.switch-link {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.switch-link:hover {
+    transform: translateX(3px);
+}
+
+/* Security assurance entrance */
+.security-assurance {
+    animation: fadeInUp 0.6s ease-out 0.4s backwards;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.security-assurance:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+}
+
+/* Form group stagger */
+.form-group:nth-child(1) {
+    animation: fadeInUp 0.5s ease-out 0.3s backwards;
+}
+
+.form-group:nth-child(2) {
+    animation: fadeInUp 0.5s ease-out 0.4s backwards;
+}
+
+.form-group:nth-child(3) {
+    animation: fadeInUp 0.5s ease-out 0.5s backwards;
+}
+
+/* Error message slide in */
+.error-message {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Toggle animation */
+.cyber-toggle input:checked + .toggle-slider {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-slider {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Logo animation */
+.login-logo h1 {
+    animation: fadeInUp 0.6s ease-out 0.1s backwards;
+}
+
+.login-logo p {
+    animation: fadeInUp 0.6s ease-out 0.2s backwards;
+}
+
+/* Auth switch animation */
+.auth-switch {
+    animation: fadeInUp 0.5s ease-out 0.6s backwards;
+}
+
+/* Advanced Mature Animations for Login */
+
+/* Professional breathing effect */
+@keyframes loginBreathe {
+    0%, 100% {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 25px 70px rgba(74, 144, 226, 0.15);
+    }
+}
+
+.login-box {
+    animation: fadeInUp 0.6s ease-out 0.2s backwards, loginBreathe 6s ease-in-out 1s infinite;
+}
+
+/* Sophisticated title gradient shift */
+.login-logo h1 {
+    background: linear-gradient(135deg, #ffffff 0%, var(--electronic-blue) 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: fadeInUp 0.6s ease-out 0.1s backwards, titleGradient 8s ease infinite;
+}
+
+@keyframes titleGradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Professional input focus with underline animation */
+.cyber-input {
+    position: relative;
+}
+
+.cyber-input::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--electronic-blue), transparent);
+    background-size: 200% 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: lineFlow 3s ease-in-out infinite;
+}
+
+.cyber-input input:focus ~ .cyber-input::before,
+.cyber-input:focus-within::before {
+    opacity: 1;
+}
+
+@keyframes lineFlow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Button sophisticated ripple */
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1), height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-btn:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+/* Terminal cursor for security text */
+.security-assurance p::after {
+    content: '█';
+    animation: blink 1.2s step-start infinite;
+    margin-left: 6px;
+    color: var(--electronic-blue);
+    opacity: 0.7;
+}
+
+/* Blinking animation for cursor */
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Form validation smooth transitions */
+.cyber-input.valid input,
+.cyber-input.invalid input {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cyber-input.valid input {
+    border-color: var(--success-green);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+.cyber-input.invalid input {
+    border-color: var(--bright-red);
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-8px);
+    }
+    75% {
+        transform: translateX(8px);
+    }
+}
+
+/* Professional error message entrance */
+.error-message {
+    animation: errorSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes errorSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 100px;
+    }
+}
+
+/* Sophisticated switch link interaction */
+.switch-link {
+    position: relative;
+    display: inline-block;
+}
+
+.switch-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--electronic-blue);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.switch-link:hover::after {
+    width: 100%;
+}
+
+/* Professional loading state */
+.login-btn.loading {
+    pointer-events: none;
+    position: relative;
+}
+
+.login-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top-color: var(--pure-white);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mature data flow effect on borders */
+.login-box {
+    position: relative;
+}
+
+.login-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--electronic-blue), transparent, var(--electronic-blue));
+    background-size: 200% 200%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: borderFlow 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.login-box:hover::after {
+    opacity: 0.3;
+}
+
+@keyframes borderFlow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Professional password strength indicator animation */
+.password-strength {
+    height: 3px;
+    background: var(--matte-light);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.password-strength::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--bright-red), var(--sunny-yellow), var(--success-green));
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sophisticated input placeholder animation */
+.cyber-input input::placeholder {
+    transition: all 0.3s ease;
+}
+
+.cyber-input input:focus::placeholder {
+    transform: translateX(5px);
+    opacity: 0.5;
+}
+
+/* Professional hover effect for security assurance */
+.security-assurance {
+    position: relative;
+    overflow: hidden;
+}
+
+.security-assurance::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(74, 144, 226, 0.05) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.security-assurance:hover::before {
+    opacity: 1;
+    animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

@@ -519,17 +519,9 @@ class IntelligentDataProcessor {
             const quotaInfo = await this.storageSystem.checkStorageQuota();
             const statsElement = document.getElementById('storageStats');
             if (statsElement) {
-                let quotaDisplay = '';
                 let storageRemaining = 'N/A';
 
                 if (quotaInfo) {
-                    const quotaWarning = quotaInfo.percentUsed > 80 ? ' style="color: #ff0066;"' : '';
-                    quotaDisplay = `
-                        <div class="stat-item"${quotaWarning}>
-                            <span class="stat-label">BROWSER_QUOTA:</span>
-                            <span class="stat-value">${quotaInfo.percentUsed}%</span>
-                        </div>
-                    `;
                     // Calculate remaining storage in GB
                     storageRemaining = this.formatFileSize(quotaInfo.available);
                 }
@@ -552,7 +544,6 @@ class IntelligentDataProcessor {
                             <span class="stat-label">STORAGE_REMAINING:</span>
                             <span class="stat-value" id="storageRemaining">${storageRemaining}</span>
                         </div>
-                        ${quotaDisplay}
                     </div>
                 `;
             }

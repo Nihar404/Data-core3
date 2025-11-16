@@ -52,19 +52,7 @@
 <section class="storage-management-section">
     <h2 class="section-title">>_ STORAGE_MANAGEMENT</h2>
     <div class="storage-controls">
-        <div class="storage-info">
-            <div class="storage-backends">
-                <h3>>_ ACTIVE_STORAGE_BACKENDS</h3>
-                <div class="backends-list" id="backendsList">
-                    <!-- Dynamically populated -->
-                </div>
-            </div>
-        </div>
-        
         <div class="storage-actions">
-            <button class="cyber-btn" id="optimizeStorageBtn" onclick="optimizeStorage()">
-                <span class="btn-text">OPTIMIZE_STORAGE</span>
-            </button>
             <button class="cyber-btn" id="clearCacheBtn" onclick="clearCache()">
                 <span class="btn-text">CLEAR_CACHE</span>
             </button>
@@ -101,81 +89,6 @@
                     <div class="analysis-placeholder">
                         <p>>_ UPLOAD_FILES_TO_SEE_INTELLIGENT_ANALYSIS</p>
                     </div>
-                </div>
-            </section>
-
-            <!-- Options Section -->
-            <section class="options-section">
-                <h2 class="section-title">>_ SYSTEM_OPTIONS</h2>
-                <div class="options-grid">
-                    <div class="option-item">
-                        <label class="option-label">ADD_METADATA</label>
-                        <div class="cyber-input">
-                            <textarea id="metadataInput" placeholder=">_ ENTER_OPTIONAL_METADATA_OR_COMMENTS..."></textarea>
-                            <div class="input-glow"></div>
-                        </div>
-                    </div>
-                    <div class="option-item">
-                        <label class="option-label">AUTO_CATEGORIZE</label>
-                        <div class="cyber-toggle">
-                            <input type="checkbox" id="autoCategorize" checked>
-                            <span class="toggle-slider">
-                                <span class="toggle-text">ON</span>
-                                <span class="toggle-glow"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="option-item">
-                        <label class="option-label">INTELLIGENT_ANALYSIS</label>
-                        <div class="cyber-toggle">
-                            <input type="checkbox" id="intelligentAnalysis" checked>
-                            <span class="toggle-slider">
-                                <span class="toggle-text">ON</span>
-                                <span class="toggle-glow"></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- JSON Conversion Section -->
-            <section class="json-conversion-section">
-                <h2 class="section-title">>_ JSON_CONVERSION_OPTIONS</h2>
-                <div class="conversion-options">
-                    <div class="option-item">
-                        <label class="option-label">CONVERT_TO_SQL</label>
-                        <div class="cyber-toggle">
-                            <input type="checkbox" id="convertToSQL">
-                            <span class="toggle-slider">
-                                <span class="toggle-text">OFF</span>
-                                <span class="toggle-glow"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="option-item">
-                        <label class="option-label">CONVERT_TO_NOSQL</label>
-                        <div class="cyber-toggle">
-                            <input type="checkbox" id="convertToNoSQL">
-                            <span class="toggle-slider">
-                                <span class="toggle-text">OFF</span>
-                                <span class="toggle-glow"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="option-item">
-                        <label class="option-label">STORE_ORIGINAL</label>
-                        <div class="cyber-toggle">
-                            <input type="checkbox" id="storeOriginal" checked>
-                            <span class="toggle-slider">
-                                <span class="toggle-text">ON</span>
-                                <span class="toggle-glow"></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="conversion-preview" id="conversionPreview" style="display: none;">
-                    <h3 class="preview-title">>_ CONVERSION_PREVIEW</h3>
-                    <div class="preview-content" id="previewContent"></div>
                 </div>
             </section>
 
@@ -250,11 +163,6 @@
             </section>
         </main>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-grid"></div>
-            <p>>_ DATA_BHANDAAR_©_2023_|_INTELLIGENT_MULTI_MODAL_STORAGE_SYSTEM</p>
-        </footer>
     </div>
 
     <script src="scripts/storage.js"></script>
